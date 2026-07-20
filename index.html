@@ -468,7 +468,39 @@ document.getElementById('genBtn').addEventListener('click', async ()=>{
     genMsg.classList.remove('show');
     wallet = result.wallet;
     await loadAdminData();
-
+window.lastGeneratedCards = result.cards;
+        let dlBtn = document.getElementById('downloadPdfBtn');
+        if(!dlBtn){
+          dlBtn = document.createElement('button');
+          dlBtn.id = 'downloadPdfBtn';
+          dlBtn.className = 'btn';
+          dlBtn.style.marginTop = '10px';
+          dlBtn.textContent = 'Download as PDF';
+          genMsg.parentElement.appendChild(dlBtn);
+          dlBtn.addEventListener('click', async ()=>{
+            dlBtn.textContent = 'Generating PDF...';
+            try{
+              const resp = await fetch(API_BASE + '/api/cards/pdf', {
+                method:'POST',
+                headers: {'Content-Type':'application/json', 'x-admin-password': adminPassword},
+                body: JSON.stringify({cards: window.lastGeneratedCards})
+              });
+              if(!resp.ok){ alert('Could not generate PDF'); dlBtn.textContent = 'Download as PDF'; return; }
+              const blob = await resp.blob();
+              const url = window.URL.createObjectURL(blob);
+              const a = document.createElement('a');
+              a.href = url;
+              a.download = 'e24data-cards.pdf';
+              document.body.appendChild(a);
+              a.click();
+              a.remove();
+            } catch(e){
+              alert('Could not reach the server: ' + e.message);
+            }
+            dlBtn.textContent = 'Download as PDF';
+          });
+        }
+        dlBtn.style.display = 'block';
     const last = result.cards[result.cards.length-1];
     document.getElementById('demoCardPanel').style.display = 'block';
     setupScratch(last.pin, last.network, last.size);
