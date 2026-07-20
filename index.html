@@ -355,7 +355,7 @@ document.querySelectorAll('[data-go]').forEach(el=>{
 
 let cards = [];
 let wallet = 0;
-let adminPassword = '';
+let adminPassword = localStorage.getItem('adminPassword') || '';
 
 /* ---------- Backend helpers ---------- */
 async function api(path, options = {}){
@@ -420,6 +420,7 @@ document.getElementById('loginBtn').addEventListener('click', async ()=>{
   const pass = document.getElementById('adminPass').value;
   const msg = document.getElementById('loginMsg');
   adminPassword = pass;
+  localStorage.setItem('adminPassword', pass);
   try{
     await api('/api/wallet');
     msg.classList.remove('show');
@@ -427,6 +428,7 @@ document.getElementById('loginBtn').addEventListener('click', async ()=>{
     loadAdminData();
   }catch(e){
     adminPassword = '';
+    localStorage.removeItem('adminPassword');
     if(e.kind === 'network'){
       msg.textContent = 'Could not reach the server at all — check the URL is correct and try again in a minute (free servers can take 30-60s to wake up).';
     } else if(e.kind === 'auth'){
