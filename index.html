@@ -506,7 +506,7 @@ window.lastGeneratedCards = result.cards;
     const last = result.cards[result.cards.length-1];
     document.getElementById('demoCardPanel').style.display = 'block';
     setupScratch(last.pin, last.network, last.size);
-    document.getElementById('demoCardPanel').scrollIntoView({behavior:'smooth', block:'nearest'});
+    document.getElementById('demoCardPanel').scrollIntoView({behavior:'auto', block:'nearest'});
   }catch(e){
     genMsg.textContent = e.message || 'Could not generate cards.';
     genMsg.classList.add('show');
