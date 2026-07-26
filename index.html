@@ -303,14 +303,21 @@
     </div>
 
     <div class="card-panel">
-      <h2>All Cards (Database)</h2>
-      <p class="sub">List of generated cards — saved instantly.</p>
+   <h2>All Cards (Database)</h2>
+<p class="sub">List of generated cards — saved instantly.</p>
+<button class="btn btn-ghost" id="clearViewBtn" style="margin-bottom:10px;">Clear</button>
       <div class="table-scroll">
         <table>
           <thead><tr><th>PIN</th><th>Network</th><th>Data</th><th>₦</th><th>Status</th></tr></thead>
           <tbody id="cardTableBody"><tr><td colspan="5" class="empty-row">No cards yet</td></tr></tbody>
         </table>
-      </div>
+    </div>
+    </div>
+
+    <div class="card-panel">
+      <h2>History</h2>
+      <p class="sub">All cards grouped by network and plan — shows what's available.</p>
+      <div id="historyBody"></div>
     </div>
 
     <button class="btn btn-ghost" id="logoutBtn" style="width:100%;">Log Out</button>
