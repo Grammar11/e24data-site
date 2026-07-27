@@ -411,11 +411,13 @@ function renderStats(){
 }
 function renderTable(){
   const body = document.getElementById('cardTableBody');
-  if(cards.length === 0){
-    body.innerHTML = '<tr><td colspan="5" class="empty-row">No cards yet</td></tr>';
-    return;
-  }
-  body.innerHTML = cards.slice().reverse().slice(0,100).map(c => `
+const clearedCount = parseInt(localStorage.getItem('historyClearedCount') || '0', 10);
+    const stillVisible = cards.slice(clearedCount);
+    if(stillVisible.length === 0){
+      body.innerHTML = '<tr><td colspan="5" class="empty-row">No cards yet</td></tr>';
+      return;
+    }
+    body.innerHTML = stillVisible.slice().reverse().slice(0,100).map(c => `
     <tr>
       <td>${c.pin}</td><td>${c.network}</td><td>${c.size}</td><td>${c.price}</td>
       <td><span class="status ${c.status}">${c.status==='unused'?'Unused':'Used'}</span></td>
