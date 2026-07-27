@@ -80,7 +80,7 @@
   .btn-primary{background:var(--yellow);color:var(--black);}
   .btn-primary:hover{background:var(--yellow-deep);}
   .btn-ghost{background:rgba(255,255,255,0.08);color:var(--white);border:1.5px solid rgba(255,255,255,0.2);}
-
+.btn-ghost-dark{background:rgba(0,0,0,0.05);color:var(--black);border:1.5px solid rgba(0,0,0,0.2);}
   .feature-grid{
     display:grid;grid-template-columns:1fr 1fr;gap:12px;
     margin-top:40px;
@@ -305,8 +305,7 @@
     <div class="card-panel">
    <h2>All Cards (Database)</h2>
 <p class="sub">List of generated cards — saved instantly.</p>
-<button class="btn btn-ghost" id="clearViewBtn" style="margin-bottom:10px;">Clear</button>
-      <div class="table-scroll">
+<button class="btn btn-ghost-dark" id="clearViewBtn">
         <table>
           <thead><tr><th>PIN</th><th>Network</th><th>Data</th><th>₦</th><th>Status</th></tr></thead>
           <tbody id="cardTableBody"><tr><td colspan="5" class="empty-row">No cards yet</td></tr></tbody>
