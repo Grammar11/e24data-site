@@ -424,8 +424,7 @@ const clearedCount = parseInt(localStorage.getItem('historyClearedCount') || '0'
 }
 function renderHistory(){
   const body = document.getElementById('historyBody');
-  const clearedCount = parseInt(localStorage.getItem('historyClearedCount') || '0', 10);
-  const visible = cards.slice(clearedCount);
+  const visible = cards;
 
   if(visible.length === 0){
     body.innerHTML = '<p class="empty-row">No cards yet</p>';
