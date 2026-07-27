@@ -397,7 +397,7 @@ async function loadAdminData(){
     wallet = w.wallet;
     const c = await api('/api/cards');
     cards = c.cards;
-    renderWallet(); renderTable(); renderStats();
+    renderWallet(); renderTable(); renderStats();renderHistory();
   }catch(e){
     console.error(e);
   }
@@ -421,7 +421,44 @@ function renderTable(){
       <td><span class="status ${c.status}">${c.status==='unused'?'Unused':'Used'}</span></td>
     </tr>`).join('');
 }
+function renderHistory(){
+  const body = document.getElementById('historyBody');
+  const clearedCount = parseInt(localStorage.getItem('historyClearedCount') || '0', 10);
+  const visible = cards.slice(clearedCount);
 
+  if(visible.length === 0){
+    body.innerHTML = '<p class="empty-row">No cards yet</p>';
+    return;
+  }
+
+  const groups = {};
+  visible.forEach(c=>{
+    groups[c.network] = groups[c.network] || {};
+    groups[c.network][c.size] = groups[c.network][c.size] || [];
+    groups[c.network][c.size].push(c);
+  });
+
+  let html = '';
+  Object.keys(groups).sort().forEach(net=>{
+    html += `<h3>${net}</h3>`;
+    Object.keys(groups[net]).sort().forEach(plan=>{
+      const list = groups[net][plan];
+      html += `<h4>${plan} (${list.length})</h4>`;
+      html += '<table class="history-table"><tbody>';
+      list.forEach(c=>{
+        html += `<tr><td>${c.pin}</td><td><span class="status ${c.status}">${c.status==='unused'?'Unused':'Used'}</span></td></tr>`;
+      });
+      html += '</tbody></table>';
+    });
+  });
+
+  body.innerHTML = html;
+}
+
+document.getElementById('clearViewBtn').addEventListener('click', ()=>{
+  localStorage.setItem('historyClearedCount', cards.length);
+  renderHistory();
+});
 /* ---------- Admin login ---------- */
 document.getElementById('loginBtn').addEventListener('click', async ()=>{
   const pass = document.getElementById('adminPass').value;
