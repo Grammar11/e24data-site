@@ -458,7 +458,8 @@ function renderHistory(){
 
 document.getElementById('clearViewBtn').addEventListener('click', ()=>{
   localStorage.setItem('historyClearedCount', cards.length);
-  renderHistory();
+  renderTable();
+    renderHistory();
 });
 /* ---------- Admin login ---------- */
 document.getElementById('loginBtn').addEventListener('click', async ()=>{
