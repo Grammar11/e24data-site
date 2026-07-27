@@ -410,7 +410,8 @@ function renderStats(){
 }
 function renderTable(){
   const body = document.getElementById('cardTableBody');
-const visible = cards;
+const clearedCount = parseInt(localStorage.getItem('historyClearedCount') || '0', 10);
+    const stillVisible = cards.slice(clearedCount);
     if(stillVisible.length === 0){
       body.innerHTML = '<tr><td colspan="5" class="empty-row">No cards yet</td></tr>';
       return;
