@@ -361,8 +361,7 @@ document.querySelectorAll('[data-go]').forEach(el=>{
 
 let cards = [];
 let wallet = 0;
-let adminPassword = localStorage.getItem('adminPassword') || '';
-if(adminPassword){ go('admin'); loadAdminData(); }
+let adminPassword = '';
 /* ---------- Backend helpers ---------- */
 async function api(path, options = {}){
   let res;
