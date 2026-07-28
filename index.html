@@ -464,7 +464,7 @@ document.getElementById('loginBtn').addEventListener('click', async ()=>{
   const pass = document.getElementById('adminPass').value;
   const msg = document.getElementById('loginMsg');
   adminPassword = pass;
-  localStorage.setItem('adminPassword', pass);
+  
   try{
     await api('/api/wallet');
     msg.classList.remove('show');
