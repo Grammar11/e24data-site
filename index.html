@@ -338,6 +338,9 @@
 </div>
 
 <script>
+window.onerror = function(msg, url, line, col, error) {
+  alert('JS ERROR: ' + msg + ' — Layi: ' + line);
+};
 /* ==========================================================================
    API_BASE_URL — set this to your deployed backend URL once you deploy the
    e24data-backend server (see its README.md). Until then, Redeem and the
