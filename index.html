@@ -501,7 +501,7 @@ document.getElementById('genBtn').addEventListener('click', async ()=>{
   const network = document.getElementById('network').value;
   const size = document.getElementById('size').value;
   const price = parseInt(document.getElementById('price').value) || 0;
-  const qty = Math.min(Math.max(parseInt(document.getElementById('qty').value)||1,1),50);
+  const qty = Math.min(Math.max(parseInt(document.getElementById('qty').value)||1,1),5000);
   const genMsg = document.getElementById('genMsg');
 
   try{
