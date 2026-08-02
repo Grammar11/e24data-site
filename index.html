@@ -416,7 +416,7 @@ const clearedCount = parseInt(localStorage.getItem('historyClearedCount') || '0'
     body.innerHTML = stillVisible.slice().reverse().slice(0,100).map(c => `
     <tr>
       <td>${c.pin}</td><td>${c.network}</td><td>${c.size}</td><td>${c.price}</td>
-      <td><span class="status ${c.status}">${c.status==='unused'?'Unused':'Used'}</span></td>
+   <td><span class="status ${c.status}">${c.status==='unused'?'Unused':'Used → '+(c.redeemedTo||'')}</span></td>
     </tr>`).join('');
 }
 function renderHistory(){
@@ -443,7 +443,7 @@ function renderHistory(){
       html += `<h4>${plan} (${list.length})</h4>`;
       html += '<table class="history-table"><tbody>';
       list.forEach(c=>{
-        html += `<tr><td>${c.pin}</td><td><span class="status ${c.status}">${c.status==='unused'?'Unused':'Used'}</span></td></tr>`;
+       html += `<tr><td>${c.pin}</td><td><span class="status ${c.status}">${c.status==='unused'?'Unused':'Used → '+(c.redeemedTo||'')}</span></td>
       });
       html += '</tbody></table>';
     });
