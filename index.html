@@ -524,20 +524,9 @@ window.lastGeneratedCards = result.cards;
           dlBtn.addEventListener('click', async ()=>{
             dlBtn.textContent = 'Generating PDF...';
             try{
-              const resp = await fetch(API_BASE_URL + '/api/cards/pdf', {
-                method:'POST',
-                headers: {'Content-Type':'application/json', 'x-admin-password': adminPassword},
-                body: JSON.stringify({cards: window.lastGeneratedCards})
-              });
-              if(!resp.ok){ alert('Could not generate PDF'); dlBtn.textContent = 'Download as PDF'; return; }
               const blob = await resp.blob();
-              const url = window.URL.createObjectURL(blob);
-              const a = document.createElement('a');
-              a.href = url;
-              a.download = 'e24data-cards.pdf';
-              document.body.appendChild(a);
-              a.click();
-              a.remove();
+const url = window.URL.createObjectURL(blob);
+window.open(url, '_blank');
             } catch(e){
               alert('Could not reach the server: ' + e.message);
             }
