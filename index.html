@@ -521,17 +521,28 @@ window.lastGeneratedCards = result.cards;
           dlBtn.style.marginTop = '10px';
           dlBtn.textContent = 'Download as PDF';
           genMsg.parentElement.appendChild(dlBtn);
-          dlBtn.addEventListener('click', async ()=>{
-            dlBtn.textContent = 'Generating PDF...';
-            try{
-              const blob = await resp.blob();
-const url = window.URL.createObjectURL(blob);
-window.open(url, '_blank');
-            } catch(e){
-              alert('Could not reach the server: ' + e.message);
-            }
-            dlBtn.textContent = 'Download as PDF';
-          });
+          dlBtn.addEventListener('click', ()=>{
+              const form = document.createElement('form');
+              form.method = 'POST';
+              form.action = API_BASE_URL + '/api/cards/pdf';
+              form.target = '_blank';
+
+              const cardsInput = document.createElement('input');
+              cardsInput.type = 'hidden';
+              cardsInput.name = 'cards';
+              cardsInput.value = JSON.stringify(window.lastGeneratedCards);
+              form.appendChild(cardsInput);
+
+              const pwInput = document.createElement('input');
+              pwInput.type = 'hidden';
+              pwInput.name = 'adminPassword';
+              pwInput.value = adminPassword;
+              form.appendChild(pwInput);
+
+              document.body.appendChild(form);
+              form.submit();
+              setTimeout(()=>form.remove(), 1000);
+            });
         }
         dlBtn.style.display = 'block';
     const last = result.cards[result.cards.length-1];
