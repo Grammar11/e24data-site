@@ -448,7 +448,7 @@ function renderHistory(){
       html += `<h4>${plan} (${list.length})</h4>`;
       html += '<table class="history-table"><tbody>';
       list.forEach(c=>{
-       html += `<tr><td>${c.pin}</td><td><span class="status ${c.status}">${c.status==='unused'?'Unused':'Used → '+(c.redeemedTo||'')}</span></td>
+       html += `<tr><td>${c.pin}</td><td><span class="status ${c.status}">${c.status==='unused'?'Unused':'Used → '+(c.redeemedTo||'')}</span></td></tr>`;
       });
       html += '</tbody></table>';
     });
