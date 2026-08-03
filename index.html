@@ -420,7 +420,7 @@ const clearedCount = parseInt(localStorage.getItem('historyClearedCount') || '0'
     }
     body.innerHTML = stillVisible.slice().reverse().slice(0,100).map(c => `
     <tr>
-     <td>${c.serial||'-'}</td><td>${c.pin}</td><td>${c.network}</td><td>${c.size}</td><td>${c.price}</td>
+     <td>${c.serial||'-'}</td><td>${c.pin}</td><td>${c.network}</td><td>${c.size}</td>
    <td><span class="status ${c.status}">${c.status==='unused'?'Unused':'Used → '+(c.redeemedTo||'')}</span></td>
     </tr>`).join('');
 }
