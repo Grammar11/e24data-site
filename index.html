@@ -284,7 +284,11 @@
       <button class="primary" id="genBtn">Generate Cards</button>
       <div class="msg fail" id="genMsg">Your wallet balance is too low. Top up to continue.</div>
     </div>
-
+<div style="margin-top:20px;">
+  <input type="text" id="deleteSerials" placeholder="Serial numbers, comma-separated (e.g. 00003552,00003553)" style="width:100%;padding:8px;">
+  <button id="deleteBtn" class="btn" style="margin-top:8px;">Delete Cards by Serial</button>
+  <span id="deleteMsg"></span>
+</div>
     <div class="card-panel" id="demoCardPanel" style="display:none;">
       <h2>New Card (Scratch to Reveal PIN)</h2>
       <p class="sub">This is how the physical card will feel — scratch the gray panel.</p>
