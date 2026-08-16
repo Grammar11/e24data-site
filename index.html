@@ -594,6 +594,32 @@ document.getElementById('deleteBtn').addEventListener('click', async () => {
     deleteMsg.textContent = e.message || 'Could not delete cards.';
   }
 });
+  document.getElementById('searchBtn').addEventListener('click', async () => {
+  const serial = document.getElementById('searchSerial').value.trim();
+  const from = document.getElementById('searchFrom').value.trim();
+  const to = document.getElementById('searchTo').value.trim();
+  const summary = document.getElementById('searchSummary');
+  const body = document.getElementById('searchResultBody');
+
+  if (!serial && !(from && to)) {
+    summary.textContent = 'Enter a single serial, or both From and To.';
+    return;
+  }
+
+  try {
+    const payload = serial ? { serial } : { from, to };
+    const result = await api('/api/cards/search', {
+      method: 'POST',
+      body: JSON.stringify(payload)
+    });
+    summary.textContent = `Total: ${result.total} | Used: ${result.used} | Unused: ${result.unused}`;
+    body.innerHTML = result.cards.map(c =>
+      `<tr><td>${c.serial}</td><td>${c.pin}</td><td>${c.network}</td><td>${c.size}</td><td>${c.status}</td></tr>`
+    ).join('');
+  } catch (e) {
+    summary.textContent = e.message || 'No cards found.';
+  }
+});
 /* ---------- Scratch card ---------- */
 function setupScratch(pin, network, size){
   const canvas = document.getElementById('scratchCanvas');
