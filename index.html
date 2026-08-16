@@ -289,6 +289,19 @@
   <button id="deleteBtn" class="btn" style="margin-top:8px;">Delete Cards by Serial</button>
   <span id="deleteMsg"></span>
 </div>
+    <div style="margin-top:20px;">
+  <input type="text" id="searchSerial" placeholder="Single serial (e.g. 00003600)" style="width:100%;padding:8px;">
+  <div style="margin-top:6px;">
+    <input type="text" id="searchFrom" placeholder="From serial" style="width:48%;padding:8px;">
+    <input type="text" id="searchTo" placeholder="To serial" style="width:48%;padding:8px;">
+  </div>
+  <button id="searchBtn" class="btn" style="margin-top:8px;">Search</button>
+  <div id="searchSummary" style="margin-top:10px;font-weight:bold;"></div>
+  <table id="searchResultTable" style="width:100%;margin-top:10px;">
+    <thead><tr><th>S/N</th><th>PIN</th><th>Network</th><th>Data</th><th>Status</th></tr></thead>
+    <tbody id="searchResultBody"></tbody>
+  </table>
+    </div>
     <div class="card-panel" id="demoCardPanel" style="display:none;">
       <h2>New Card (Scratch to Reveal PIN)</h2>
       <p class="sub">This is how the physical card will feel — scratch the gray panel.</p>
