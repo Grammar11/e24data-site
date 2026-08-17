@@ -598,7 +598,6 @@ document.getElementById('deleteBtn').addEventListener('click', async () => {
         body: JSON.stringify(payload)
       });
     
-    });
     deleteMsg.textContent = `Removed ${result.removed} card(s). ${result.remaining} remain.`;
     document.getElementById('deleteSerials').value = '';
     await loadAdminData();
