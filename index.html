@@ -285,9 +285,13 @@
       <div class="msg fail" id="genMsg">Your wallet balance is too low. Top up to continue.</div>
     </div>
 <div style="margin-top:20px;">
-  <input type="text" id="deleteSerials" placeholder="Serial numbers, comma-separated (e.g. 00003552,00003553)" style="width:100%;padding:8px;">
-  <button id="deleteBtn" class="btn" style="margin-top:8px;">Delete Cards by Serial</button>
-  <span id="deleteMsg"></span>
+<input type="text" id="deleteSerials" placeholder="Serial numbers, comma separated (e.g. 00003600)" style="width:100%;padding:8px;">
+<div style="margin-top:6px;">
+  <input type="text" id="deleteFrom" placeholder="From serial" style="width:48%;padding:8px;">
+  <input type="text" id="deleteTo" placeholder="To serial" style="width:48%;padding:8px;">
+</div>
+<button id="deleteBtn" class="btn" style="margin-top:8px;">Delete Cards by Serial</button>
+<span id="deleteMsg"></span>
 </div>
     <div style="margin-top:20px;">
   <input type="text" id="searchSerial" placeholder="Single serial (e.g. 00003600)" style="width:100%;padding:8px;">
