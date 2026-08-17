@@ -527,7 +527,10 @@ document.getElementById('genBtn').addEventListener('click', async ()=>{
   const network = document.getElementById('network').value;
   const size = document.getElementById('size').value;
   const price = parseInt(document.getElementById('price').value) || 0;
-  const qty = Math.min(Math.max(parseInt(document.getElementById('qty').value)||1,1),5000);
+  const qtyRaw = document.getElementById('qty').value;
+const genMsgEarly = document.getElementById('genMsg');
+if (!qtyRaw || parseInt(qtyRaw) < 1) { genMsgEarly.textContent = 'Please enter number of cards.'; genMsgEarly.classList.add('show'); return; }
+const qty = Math.min(parseInt(qtyRaw), 5000);
   const genMsg = document.getElementById('genMsg');
 
   try{
