@@ -614,7 +614,7 @@ document.getElementById('deleteBtn').addEventListener('click', async () => {
     });
     summary.textContent = `Total: ${result.total} | Used: ${result.used} | Unused: ${result.unused}`;
     body.innerHTML = result.cards.map(c =>
-      `<tr><td>${c.serial}</td><td>${c.pin}</td><td>${c.network}</td><td>${c.size}</td><td>${c.status}</td></tr>`
+     `<tr><td>${c.serial}</td><td>${c.pin}</td><td>${c.network}</td><td>${c.size}</td><td>${c.status}${c.status === 'used' && c.redeemedTo ? ' → ' + c.redeemedTo : ''}</td></tr>`
     ).join('');
   } catch (e) {
     summary.textContent = e.message || 'No cards found.';
