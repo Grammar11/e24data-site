@@ -587,9 +587,16 @@ document.getElementById('deleteBtn').addEventListener('click', async () => {
     const deleteMsg = document.getElementById('deleteMsg');
     if (!raw && !(from && to)) { deleteMsg.textContent = 'Enter serial numbers, or both From and To.'; return; }
     const serials = raw ? raw.split(',').map(s => s.trim()).filter(Boolean) : [];
-    const confirmText = raw
-      ? `Delete ${serials.length} card(s)? This cannot be undone.`
-      : `Delete all cards from ${from} to ${to}? This cannot be undone.`;
+    let confirmText;
+if (raw) {
+  confirmText = `Delete ${serials.length} card(s)? This cannot be undone.`;
+} else {
+  const preview = await api('/api/cards/search', {
+    method: 'POST',
+    body: JSON.stringify({ from, to })
+  });
+  confirmText = `Delete ${preview.total} card(s) from ${from} to ${to}? This cannot be undone.`;
+}
     if (!confirm(confirmText)) return;
     try {
       const payload = raw ? { serials } : { from, to };
