@@ -626,16 +626,15 @@ if (raw) {
       body: JSON.stringify({ confirm: false })
     });
     if (!preview.count) {
-      msg.textContent = 'Babu redeemed cards.';
+    msg.textContent = 'No redeemed cards found.';
       return;
     }
-    if (!confirm('Za a goge redeemed cards ' + preview.count + ' har abada. Ba za a iya dawo da su ba. Ka tabbata?')) return;
-
+    if (!confirm('This will permanently delete ' + preview.count + ' redeemed card(s). This cannot be undone. Are you sure?')) return;
     const result = await api('/api/cards/delete-redeemed', {
       method: 'POST',
       body: JSON.stringify({ confirm: true })
     });
-    msg.textContent = 'An goge ' + result.removed + '. Saura: ' + result.remaining;
+        msg.textContent = 'Deleted ' + result.removed + ' card(s). Remaining: ' + result.remaining;
     try { localStorage.setItem('historyClearedCount', '0'); } catch (e) {}
     await loadAdminData();
   } catch (e) {
