@@ -617,6 +617,31 @@ if (raw) {
     deleteMsg.textContent = e.message || 'Could not delete cards.';
   }
 });
+  document.getElementById('deleteRedeemedBtn').addEventListener('click', async () => {
+  const msg = document.getElementById('deleteRedeemedMsg');
+  msg.textContent = '';
+  try {
+    const preview = await api('/api/cards/delete-redeemed', {
+      method: 'POST',
+      body: JSON.stringify({ confirm: false })
+    });
+    if (!preview.count) {
+      msg.textContent = 'Babu redeemed cards.';
+      return;
+    }
+    if (!confirm('Za a goge redeemed cards ' + preview.count + ' har abada. Ba za a iya dawo da su ba. Ka tabbata?')) return;
+
+    const result = await api('/api/cards/delete-redeemed', {
+      method: 'POST',
+      body: JSON.stringify({ confirm: true })
+    });
+    msg.textContent = 'An goge ' + result.removed + '. Saura: ' + result.remaining;
+    try { localStorage.setItem('historyClearedCount', '0'); } catch (e) {}
+    await loadAdminData();
+  } catch (e) {
+    msg.textContent = e.message || 'Could not delete redeemed cards.';
+  }
+});
   document.getElementById('searchBtn').addEventListener('click', async () => {
   const serial = document.getElementById('searchSerial').value.trim();
   const from = document.getElementById('searchFrom').value.trim();
